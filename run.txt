@@ -4,7 +4,7 @@
 #SBATCH --mem 200G
 #SBATCH --time 24:0:0
 #SBATCH --mail-type ALL
-#SBATCH --account=croftap-stia-atac
+#SBATCH --account=croftap-XXXX
 
 
 set -e
@@ -17,18 +17,20 @@ module load Nextflow/24.04.2
 ## use genome size 1.87e9 for mouse
 
 nextflow run main.nf \
-    --reads '/rds/projects/m/mahonyc-runx1-bulk-seq-data/tamoxifen_exvivo/fastqs/nf_fastqs/*_{1,2}.fq.gz' \
-    --bowtie2_index '/rds/projects/c/croftap-runx1data01/analysis_of_public_data_sets/data_from_koliaspaper/Bulk_RNAseq/alingment_new/mm10/mm10/' \
-    --gtf_file '/rds/projects/c/croftap-runx1data01/analysis_of_public_data_sets/data_from_koliaspaper/Bulk_RNAseq/output/GENOME/MM10.gtf' \
+    --reads '/path/nf_fastqs/*_{1,2}.fq.gz' \
+    --bowtie2_index '/path/mm10/mm10/' \
+    --gtf_file '/path/GENOME/MM10.gtf' \
     --outdir './results' \
     --genome_size 1.87e9 \
     -resume
 
+# This is not a mistake- the wf does not trigger MACS2, but re running it will
+
 
 nextflow run main.nf \
-    --reads '/rds/projects/m/mahonyc-runx1-bulk-seq-data/tamoxifen_exvivo/fastqs/nf_fastqs/*_{1,2}.fq.gz' \
-    --bowtie2_index '/rds/projects/c/croftap-runx1data01/analysis_of_public_data_sets/data_from_koliaspaper/Bulk_RNAseq/alingment_new/mm10/mm10/' \
-    --gtf_file '/rds/projects/c/croftap-runx1data01/analysis_of_public_data_sets/data_from_koliaspaper/Bulk_RNAseq/output/GENOME/MM10.gtf' \
+    --reads '/path/nf_fastqs/*_{1,2}.fq.gz' \
+    --bowtie2_index '/path/mm10/mm10/' \
+    --gtf_file '/path/GENOME/MM10.gtf' \
     --outdir './results' \
     --genome_size 1.87e9 \
     -resume
